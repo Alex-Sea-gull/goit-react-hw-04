@@ -12,6 +12,7 @@ function App() {
   const [isLoading, setIsLoading] = useState(false); // лоадер
   const [isError, setIsError] = useState(false); // помилка
   const [page, setPage] = useState(1); // номер сторінки
+  const [totalPages, setTotalPages] = useState(1); // перевірка кількості сторінок
 
   useEffect(() => {
     if (!searchValue) return;
@@ -25,6 +26,8 @@ function App() {
 
         const fetchResult = await fetchArticles(searchValue, page);
         setArticles((prev) => [...prev, ...fetchResult.data.results]);
+        setTotalPages(fetchResult.data.total_pages);
+
         console.log(fetchResult);
       } catch (error) {
         setIsError(true);
@@ -52,7 +55,9 @@ function App() {
       {isLoading && <Loader />}
       {isError && <ErrorMessage />}
       {articles.length > 0 && <ImageGallery articles={articles} />}
-      {articles.length > 0 && <LoadMoreBtn onLoadMore={handleChangePage} />}
+      {articles.length > 0 && page < totalPages && (
+        <LoadMoreBtn onLoadMore={handleChangePage} />
+      )}
     </div>
   );
 }
