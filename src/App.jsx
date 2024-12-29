@@ -1,24 +1,27 @@
 import { useEffect, useState } from "react";
-import SearchBar from "./components/SearchBAr/SearchBar";
-
+import SearchBar from "./components/SearchBar/SearchBar";
 import ImageGallery from "./components/ImageGallery/ImageGallery";
 import { fetchArticles } from "./components/services/api";
+import Loader from "./components/Loader/Loader";
 
 function App() {
   const [articles, setArticles] = useState([]);
   const [searchValue, setSearchValue] = useState("");
-
-  // const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     if (!searchValue) return;
 
     const getArticlesData = async () => {
       try {
-        const results = await fetchArticles(searchValue);
-        setArticles(results.data.results);
+        setIsLoading(true);
+        const fetchResult = await fetchArticles(searchValue);
+        setArticles(fetchResult.data.results);
+        console.log(fetchResult);
       } catch (error) {
         console.log("Помилка завантаження даних", error);
+      } finally {
+        setIsLoading(false);
       }
     };
     getArticlesData();
@@ -33,6 +36,7 @@ function App() {
     <div>
       <SearchBar onSubmit={getSubmitValue} />
       <ImageGallery articles={articles} />
+      {isLoading && <Loader />}
     </div>
   );
 }
