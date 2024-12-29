@@ -3,7 +3,7 @@ import s from "./Loader.module.css";
 
 const Loader = () => {
   return (
-    <div className={s.wrapperLoader}>
+    <div className={s.loader}>
       <Audio
         height="80"
         width="80"

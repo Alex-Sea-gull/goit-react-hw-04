@@ -1,37 +1,56 @@
 .header {
-    background-color: #0066cc;
-    padding: 10px 0;
-    width: 100%;
-    position: fixed;
-    top: 0;
-    left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+    position: sticky;
+    top: 20px;
     z-index: 999;
 }
 
-form {
+.form {
     display: flex;
-    flex-direction: row;
     align-items: center;
-    justify-content: center;
-    gap: 20px;
+    max-width: 600px;
+    width: 100%;
 }
 
-input {
-    font-family: Arial, sans-serif;
+.input {
+    width: 100%;
     padding: 10px;
-    border: none;
+    font-size: 16px;
     border-radius: 5px;
-    width: 300px;
+    border: 1px solid #ccc;
+    margin-right: 10px;
     outline: none;
+    transition: border-color 0.3s ease;
 }
 
-button {
+.input:focus {
+    border-color: #007bff;
+}
+
+.button {
     padding: 10px 20px;
-    font-size: 20px;
-    font-weight: bold;
+    background-color: #007bff;
+    color: white;
     border: none;
-    background-color: white;
-    color: #0066cc;
-    cursor: pointer;
     border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.button:hover {
+    background-color: #0056b3;
+}
+
+.button:active {
+    background-color: #004085;
+    transform: scale(0.98);
+}
+
+.button:disabled {
+    background-color: #cccccc;
+    cursor: not-allowed;
 }

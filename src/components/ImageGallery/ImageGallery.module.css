@@ -2,8 +2,7 @@
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 20px;
-    padding: 80px 20px;
-    list-style: none;
+    padding: 20px;
 }
 
 .galleryItem {
