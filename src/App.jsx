@@ -5,6 +5,7 @@ import { fetchArticles } from "./components/services/api";
 import Loader from "./components/Loader/Loader";
 import ErrorMessage from "./components/ErrorMessage/ErrorMessage";
 import LoadMoreBtn from "./components/LoadMoreBtn/LoadMoreBtn";
+import toast from "react-hot-toast";
 
 function App() {
   const [articles, setArticles] = useState([]); // зображення
@@ -25,13 +26,21 @@ function App() {
         if (page === 1) setArticles([]);
 
         const fetchResult = await fetchArticles(searchValue, page);
+
+        const results = fetchResult.data.results;
+        if (results.length === 0 && page === 1) {
+          toast.success("По вашому запиту нічого не знайдено.");
+          return;
+        }
+
         setArticles((prev) => [...prev, ...fetchResult.data.results]);
         setTotalPages(fetchResult.data.total_pages);
-
+        toast.success("Дані успішно завантажено!");
         console.log(fetchResult);
       } catch (error) {
         setIsError(true);
         console.log("Помилка завантаження даних", error);
+        toast.error("Помилка завантаження даних. Спробуйте ще раз!");
       } finally {
         setIsLoading(false);
       }
