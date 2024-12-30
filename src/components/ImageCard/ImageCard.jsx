@@ -1,6 +1,11 @@
-const ImageCard = ({ article }) => {
+const ImageCard = ({ article, openModal }) => {
   return (
-    <div>
+    <div
+      onClick={() => {
+        console.log("Image clicked:", article.urls.small);
+        openModal(article.urls.regular);
+      }}
+    >
       <img src={article.urls.small} alt={article.alt_description} />
     </div>
   );
