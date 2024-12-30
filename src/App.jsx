@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import SearchBar from "./components/SearchBar/SearchBar";
 import ImageGallery from "./components/ImageGallery/ImageGallery";
 import { fetchArticles } from "./components/services/api";
 import Loader from "./components/Loader/Loader";
@@ -7,6 +6,7 @@ import ErrorMessage from "./components/ErrorMessage/ErrorMessage";
 import LoadMoreBtn from "./components/LoadMoreBtn/LoadMoreBtn";
 import toast from "react-hot-toast";
 import ImageModal from "./components/ImageModal/ImageModal";
+import SearchBar from "./components/SearchBar/SearchBar";
 
 function App() {
   const [articles, setArticles] = useState([]); // зображення
